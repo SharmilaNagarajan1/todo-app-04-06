@@ -1,22 +1,22 @@
-data "azurerm_resource_group" "rg" {
-  name = "var.resource_group_name"
+ data "azurerm_resource_group" "rg" {
+  name = var.resource_group_name
 }
 
 resource "azurerm_app_service_plan" "plan" {
   name                = var.app_service_plan_name
   location            = var.location
-  resource_group_name = azurerm_resource_group.main.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   sku {
     tier = "Basic"
     size = "B1"
   }
-  os_type = "Linux"
+  # os_type = "Linux"
 }
 
 resource "azurerm_app_service" "frontend" {
   name                = var.frontend_app_name
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.plan.id
 
   site_config {
@@ -31,7 +31,7 @@ resource "azurerm_app_service" "frontend" {
 resource "azurerm_app_service" "backend" {
   name                = var.backend_app_name
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   app_service_plan_id = azurerm_app_service_plan.plan.id
 
   site_config {
@@ -39,7 +39,7 @@ resource "azurerm_app_service" "backend" {
   }
 
   app_settings = {
-    MONGODB_URI = azurerm_cosmosdb_mongo_database.todo_db.connection_strings[0]
+    MONGODB_URI              = azurerm_cosmosdb_account.mongo.connection_strings[0]
     WEBSITE_RUN_FROM_PACKAGE = "1"
   }
 }
@@ -47,7 +47,7 @@ resource "azurerm_app_service" "backend" {
 resource "azurerm_cosmosdb_account" "mongo" {
   name                = var.cosmosdb_account_name
   location            = var.location
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   offer_type          = "Standard"
   kind                = "MongoDB"
 
@@ -63,11 +63,14 @@ resource "azurerm_cosmosdb_account" "mongo" {
     location          = var.location
     failover_priority = 0
   }
+
+  enable_automatic_failover     = true
+  public_network_access_enabled = true
 }
 
 resource "azurerm_cosmosdb_mongo_database" "todo_db" {
   name                = var.cosmosdb_db_name
-  resource_group_name = azurerm_resource_group.rg.name
+  resource_group_name = data.azurerm_resource_group.rg.name
   account_name        = azurerm_cosmosdb_account.mongo.name
 }
 
