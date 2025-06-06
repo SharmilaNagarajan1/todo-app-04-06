@@ -1,21 +1,21 @@
 variable "resource_group_name" {
-  default = " "
+  default = "kml_rg_main-79ab99031ac846af"
 }
 
 variable "location" {
-  default = " "
+  default = "westus"
 }
 
 variable "app_service_plan_name" {
-  default = " "
+  default = "todoapp-plan"
 }
 
 variable "frontend_app_name" {
-  default = "frontend-app"
+  default = "todo-frontend-app"
 }
 
 variable "backend_app_name" {
-  default = "backend-app"
+  default = "todo-backend-app"
 }
 
 variable "cosmosdb_account_name" {
