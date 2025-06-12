@@ -1,0 +1,1 @@
+mongo_atlas_connection_string = "mongodb+srv://admin:admin%40123@cluster1.lfjb0lc.mongodb.net/todos_db?retryWrites=true&w=majority&appName=Cluster1 "
