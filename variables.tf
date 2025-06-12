@@ -12,11 +12,11 @@ variable "app_service_plan_name" {
 }
 
 variable "frontend_app_name" {
-  default = "todo-frontend-app"
+  default = "frontendapp-100"
 }
 
 variable "backend_app_name" {
-  default = "backendapp-98654"
+  default = "backendapp-100"
 }
 
 
