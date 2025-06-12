@@ -25,3 +25,4 @@ variable "mongo_atlas_connection_string" {
   description = "MongoDB Atlas connection string"
   sensitive = true
 }
+
