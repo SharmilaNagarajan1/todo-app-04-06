@@ -1,0 +1,34 @@
+name: 'Deploy App Code'
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Azure Login
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Deploy Frontend to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'todo-frontend-app'
+        slot-name: 'production'
+        package: './frontend'
+
+    - name: Deploy Backend to Azure App Service
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'todo-backend-app'
+        slot-name: 'production'
+        package: './backend'
