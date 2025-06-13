@@ -21,11 +21,11 @@ jobs:
       with:
         app-name: 'frontendapp-100'
         slot-name: 'production'
-        package: './client/build'
+        package: './react-todo-app/client/build'
 
     - name: Deploy Backend to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'backendapp-100'
         slot-name: 'production'
-        package: './backend.zip'
+        package: './react-todo-app/backend.zip'
