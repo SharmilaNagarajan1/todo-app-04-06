@@ -30,7 +30,8 @@ jobs:
 
     - name: Build Frontend
       working-directory: ./react-todo-app/client
-      run: npm run build
+      run: NODE_OPTIONS=--openssl-legacy-provider npm run build
+
 
     - name: Deploy Frontend to Azure App Service
       uses: azure/webapps-deploy@v2
