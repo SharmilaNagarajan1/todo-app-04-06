@@ -1,6 +1,6 @@
 
 variable "resource_group_name" {
-  default = "kml_rg_main-2c9698815ebe4722"
+  default = "kml_rg_main-536520f5aa544a5c"
 }
 
 variable "location" {
