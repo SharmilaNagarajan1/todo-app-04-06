@@ -1,4 +1,4 @@
-name: 'Deploy App Code'
+name: 'Deploy React + Node App to Azure'
 
 on:
   push:
@@ -24,11 +24,11 @@ jobs:
       with:
         app-name: 'todo-frontend-app'
         slot-name: 'production'
-        package: './frontend'
+        package: './client/build'
 
     - name: Deploy Backend to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'todo-backend-app'
         slot-name: 'production'
-        package: './backend'
+        package: './backend.zip'
