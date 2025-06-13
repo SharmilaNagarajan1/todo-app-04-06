@@ -18,12 +18,31 @@ jobs:
       with:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
+    # ---------- FRONTEND ----------
+    - name: Set up Node.js
+      uses: actions/setup-node@v3
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+
+    - name: Install Frontend Dependencies
+      working-directory: ./react-todo-app/client
+      run: npm install
+
+    - name: Build Frontend
+      working-directory: ./react-todo-app/client
+      run: npm run build
+
     - name: Deploy Frontend to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'frontendapp-100'
         slot-name: 'production'
         package: './react-todo-app/client/build'
+
+    # ---------- BACKEND ----------
+    - name: Zip Backend
+      working-directory: ./react-todo-app
+      run: zip -r backend.zip index.js package*.json node_modules
 
     - name: Deploy Backend to Azure App Service
       uses: azure/webapps-deploy@v2
