@@ -19,13 +19,13 @@ jobs:
     - name: Deploy Frontend to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'todo-frontend-app'
+        app-name: 'frontendapp-100'
         slot-name: 'production'
         package: './client/build'
 
     - name: Deploy Backend to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'todo-backend-app'
+        app-name: 'backendapp-100'
         slot-name: 'production'
         package: './backend.zip'
