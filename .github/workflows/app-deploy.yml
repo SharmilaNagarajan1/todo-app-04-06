@@ -40,6 +40,10 @@ jobs:
         package: './react-todo-app/client/build'
 
     # ---------- BACKEND ----------
+    - name: Install Backend Dependencies
+      working-directory: ./react-todo-app
+      run: npm install
+      
     - name: Zip Backend
       working-directory: ./react-todo-app
       run: zip -r backend.zip index.js package*.json node_modules
