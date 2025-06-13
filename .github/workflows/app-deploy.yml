@@ -42,16 +42,16 @@ jobs:
 
     # ---------- BACKEND ----------
     - name: Install Backend Dependencies
-      working-directory: ./react-todo-app
+      working-directory: ./react-todo-app/backend
       run: npm install
       
     - name: Zip Backend
-      working-directory: ./react-todo-app
-      run: zip -r backend.zip index.js package*.json node_modules
+      working-directory: ./react-todo-app/backend
+      run: zip -r backend.zip . -x "*.git*" -x "*node_modules/*"
 
     - name: Deploy Backend to Azure App Service
       uses: azure/webapps-deploy@v2
       with:
         app-name: 'backendapp-100'
         slot-name: 'production'
-        package: './react-todo-app/backend.zip'
+        package: './react-todo-app/backend/backend.zip'
