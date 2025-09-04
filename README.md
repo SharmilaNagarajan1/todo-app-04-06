@@ -1,4 +1,10 @@
-react-todo-app:
+Deployed a React + Node.js Todo application with **MongoDB Atlas**:  
+  - Frontend: React on Azure App Service  
+  - Backend: Node.js + Express on Azure App Service  
+  - Secrets managed via Azure Key Vault  
+  - CI/CD via 2 GitHub Actions pipelines: infrastructure provisioning (Terraform) and application deployment  
+
+React-todo-app:
 
 Frontend (React)
 Purpose: UI where users add/delete todos.
